@@ -1,0 +1,45 @@
+<div class="container mt-2" *ngIf="personne">
+  <div class="card">
+    <div class="card-header">Person ID: {{personne_id}}</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p>Name : {{personne.nom}}</p>
+        </div>
+        <div class="col-md-6">
+          <p>Email : {{personne.email }}</p>
+        </div>
+        <div class="col-md-6">
+          <p>Function : {{personne.fonction}}</p>
+        </div>
+      </div>
+      <div class="row" *ngFor="let reservation of personne.reservations">
+        <div class="col-md-6">
+          <div class="card mb-3" >
+            <div class="card-header">Reservation ID: {{reservation.id}}</div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item">Name : {{reservation.nom}}</li>
+                <li class="list-group-item">Context : {{reservation.contexte}}</li>
+                <li class="list-group-item">Date : {{reservation.date | date: 'short'}}</li>
+                <li class="list-group-item">Duree : {{reservation.duree}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">Resource ID: {{reservation.ressource.id}}</div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item">Name : {{reservation.ressource.nom}}</li>
+                <li class="list-group-item">Type : {{reservation.ressource.type}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

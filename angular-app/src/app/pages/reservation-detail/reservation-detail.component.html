@@ -1,0 +1,46 @@
+<div class="container mt-2" *ngIf="reservation">
+  <div class="card">
+    <div class="card-header">Reservation ID: {{reservation_id}}</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p>Name : {{reservation.nom}}</p>
+        </div>
+        <div class="col-md-6">
+          <p>Context : {{reservation.contexte}}</p>
+        </div>
+        <div class="col-md-6">
+          <p>Date : {{reservation.date | date : 'dd/MM/yyyy' }}</p>
+        </div>
+        <div class="col-md-6">
+          <p>Duree : {{reservation.duree}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" >
+          <div class="card">
+            <div class="card-header">Person ID: {{reservation.personne.id}}</div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item">Name : {{reservation.personne.nom}}</li>
+                <li class="list-group-item">Email : {{reservation.personne.email}}</li>
+                <li class="list-group-item">Function : {{reservation.personne.fonction}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">Resource ID: {{reservation.ressource.id}}</div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item">Name : {{reservation.ressource.nom}}</li>
+                <li class="list-group-item">Type : {{reservation.ressource.type}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

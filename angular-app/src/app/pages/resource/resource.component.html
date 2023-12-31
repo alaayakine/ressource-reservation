@@ -1,0 +1,140 @@
+<div class="container">
+  <ng-template #errorTemplate>
+    <div class="text-danger">{{ errorMessage }}</div>
+  </ng-template>
+
+  <div class="card mt-3" *ngIf="resources; else errorTemplate">
+    <div class="card-header">Resource List</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="searchResourceFormGroup" (ngSubmit)="searchResource()">
+            <div class="input-group">
+              <label class="input-group-text bg-white">Resource Name</label>
+              <input type="text" class="form-control" formControlName="keyword">
+              <button class="btn btn-info">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-outline-warning rounded-5" data-bs-toggle="modal" data-bs-target="#createResourceModal">
+            <i class="bi bi-plus-lg"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="card">
+          <div class="card-body">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <!--<th *ngIf="authService.hasRole('ADMIN')"></th>
+                <th *ngIf="authService.hasRole('ADMIN')"></th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let resource of resources">
+                <td>{{ resource.id }}</td>
+                <td>{{ resource.nom }}</td>
+                <td>{{ resource.type }}</td>
+                <td >
+                  <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updateResourceModal" (click)="selectResource(resource)">
+                    <i class="bi bi-pen"></i>
+                  </button>
+                </td>
+                <td >
+                  <button class="btn btn-danger" (click)="deleteResource(resource.id)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserverModal" (click)="selectResource(resource)">Reserver</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateResourceModal" tabindex="-1" aria-labelledby="updateResourceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateResourceModalLabel">Update Resource</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input [(ngModel)]="newResource.nom" placeholder="Resource Nom" class="form-control mb-2">
+        <select [(ngModel)]="newResource.type" class="form-control mb-2">
+          <option value="" disabled [selected]="true">Select Type</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateResource()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createResourceModal" tabindex="-1" aria-labelledby="createResourceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createResourceModalLabel">Create Ressource</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input [(ngModel)]="newResource.nom" placeholder="Resource Nom" class="form-control mb-2">
+        <select [(ngModel)]="newResource.type" class="form-control mb-2">
+          <option value="" disabled [selected]="true">Select Type</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createResource()">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="reserverModal" tabindex="-1" aria-labelledby="reserverModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reserverModalLabel">Create Reservation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input [(ngModel)]="newReservation.nom" placeholder="Reservation Name" class="form-control mb-2">
+        <input [(ngModel)]="newReservation.contexte" placeholder="Contexte" class="form-control mb-2">
+        <input type="date" [(ngModel)]="newReservation.date" placeholder="Date" class="form-control mb-2">
+        <input [(ngModel)]="newReservation.duree" placeholder="Duree" class="form-control mb-2">
+        <input type="hidden" [(ngModel)]="newReservation.ressource_id" placeholder="Ressource id" class="form-control mb-2">
+        <!--<select [(ngModel)]="newReservation.ressource" class="form-control mb-2">-->
+        <select [ngModel]="isPersonneSelected ? newReservation.personne : ''"
+                (ngModelChange)="onPersonneChange($event)" class="form-control mb-2">
+          <option value="" disabled [selected]="!isPersonneSelected">Select Personne</option>
+          <option *ngFor="let personne of personnes" [ngValue]="personne">{{ personne.nom }}</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createReservation()">Reserver</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
