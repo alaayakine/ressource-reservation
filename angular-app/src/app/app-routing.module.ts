@@ -6,7 +6,7 @@ import {PersonneComponent} from "./pages/personne/personne.component";
 import {ReservationDetailComponent} from "./pages/reservation-detail/reservation-detail.component";
 import {PersonneDetailComponent} from "./pages/personne-detail/personne-detail.component";
 import {AuthGuard} from "./guards/auth.guard";
-import {WelcomeComponent} from "./pages/welcome/welcome.component";
+import {WelcomeComponent} from "./pages/MainPage/welcome.component";
 
 const routes: Routes = [
   {path : "", component : WelcomeComponent},

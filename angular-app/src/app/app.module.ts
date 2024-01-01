@@ -12,7 +12,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: 'http://localhost:8080',
         realm: 'sdia-realm',
-        clientId: 'sdia-angular-client'
+        clientId: 'angular-client'
       },
       initOptions: {
         onLoad: 'login-required',

@@ -1,23 +1,29 @@
 # Resource Reservation Application
 
-## Introduction
+Introduction
+Nous souhaitons créer une application basée sur une architecture de micro-services qui permet de gérer des réservations concernant des ressources. Chaque réservation concerne une seule ressource. Le système se compose de trois micro-services techniques à mettre en place :
 
-We want to create an application based on a micro-service architecture that allows you to manage reservations regarding resources. Each reservation concerns a single resource. The system consists of three technical micro-services to be set up are:
-- The Gateway service based on Spring cloud Gateway
-- The Discovery service based on Eureka Server Discovery
-- The configuration service based on Spring cloud config</br>
+Le service de passerelle basé sur Spring Cloud Gateway
+Le service de découverte basé sur Eureka Server Discovery
+Le service de configuration basé sur Spring Cloud Config
+Et deux autres micro-services :
 
-And two other micro-services :  
-- Ressource Service : which allows you to manage ressources, a resource is defined by its
-id, its name, its type (MATERIEL_INF0, MATERIEL_AUDIO_VUSUEL)
-- Reservation Service : that allows you to manage reservations made by people a reservation is defined by its id, its name, its context, its date, its duration. Each reservation is made by one person. A person is defined by its id, name, email and function.
+Service Ressource : qui permet de gérer les ressources. Une ressource est définie par son id, son nom et son type (MATERIEL_INFO, MATERIEL_AUDIO_VISUEL).
+Service Réservation : qui permet de gérer les réservations effectuées par des personnes. Une réservation est définie par son id, son nom, son contexte, sa date et sa durée. Chaque réservation est effectuée par une personne. Une personne est définie par son id, son nom, son email et sa fonction.
 
 ## Outils
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](	https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
 ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Keycloak](https://img.shields.io/badge/keycloak-%23334D5E.svg?style=for-the-badge&logo=keycloak&logoColor=white)
+
+
+
+
+
+
 ```
 - Spring Cloud
 - Eureka Discovery
@@ -48,7 +54,6 @@ Ressource-Reservation-App
                     |__ reservation-detail
                     |__ reservation
                     |__ ressource
-                    |__ welcome
                 |__ services
 
   |__ config-git-repo
@@ -105,85 +110,56 @@ Ressource-Reservation-App
 
 ## Eureka Service 
 <table align="center">
+ 
   <tr>
-    <th>Run</th>
-    <th>Test</th>
-  </tr>
-  <tr>
-    <td><img src="screenshots/5.png"/></td>
-    <td><img src="screenshots/6.png"/></td>
+    <td><img src="screens/eureka.png"/></td>
+   
   </tr>
 </table>
 <br>
 
 ## Config & Gateway Service
-<table align="center">
-  <tr>
-    <th>Config Actuator</th>
-    <th>Gateway Actuator</th>
-  </tr>
-  <tr>
-    <td><img src="screenshots/8.png"/></td>
-    <td><img src="screenshots/7.png"/></
-  </tr>
-</table>
+
+<h3>Config Actuator</h3>
+    
+<img src="screens/actu.png"/>
+<h3>Gateway Actuator</h3>
+<img src="screens/acc.png"/>
 <br>
 
 ## Ressource Service API Doc
 <table align="center">
   <tr>
     <th>Rest API</th>
-    <th>Get</th>
+    <th>Get Reservation</th>
    </tr>
   <tr>
-    <td><img src="screenshots/9.png"/></td>
-    <td><img src="screenshots/10.png"/></td>
+    <td><img src="screens/s1.png"/></td>
+    <td><img src="screens/s4.png"/></td>
   </tr>
-    <th>Post</th>
+    <th>Get ressource</th>
     <th>Get Id</th>
   <tr>
-    <td><img src="screenshots/11.png"/></td>
-    <td><img src="screenshots/12.png"/></td>
+    <td><img src="screens/s3.png"/></td>
+    <td><img src="screens/s2.png"/></td>
   </tr>
    </tr>
     <th>Update</th>
     <th>Delete</th>
   <tr>
-    <td><img src="screenshots/13.png"/></td>
-    <td><img src="screenshots/14.png"/></td>
+    <td><img src="screens/13.png"/></td>
+    <td><img src="screens/14.png"/></td>
   </tr>
 </table>
 <br>
 
-## Reservation Service API Doc
-<table align="center">
-  <tr>
-    <th>Reservation Rest API</th>
-    <th>Personne Rest API</th>
-   </tr>
-  <tr>
-    <td><img src="screenshots/15.png"/></td>
-    <td><img src="screenshots/16.png"/></td>
-  </tr>
-    <th>Get Reservation</th>
-    <th>Post Personne</th>
-  <tr>
-    <td><img src="screenshots/17.png"/></td>
-    <td><img src="screenshots/18.png"/></td>
-  </tr>
-  </tr>
-    <th>Update Reservation</th>
-    <th>Delete Personne</th>
-  <tr>
-    <td><img src="screenshots/19.png"/></td>
-    <td><img src="screenshots/20.png"/></td>
-  </tr>
-</table>
+
+
 <br>
 
 ## OpenFeign & Circuit Breaker
-- OpenFeign is a declarative web service client that allows you to define RESTful web services as interfaces, and it automatically translates these interfaces into HTTP requests. This approach simplifies the integration of external services into your application.
-- Circuit breaker is a design pattern used in distributed systems to prevent a single service failure from cascading and causing the entire system to fail. It is a way to handle faults and latency in a distributed environment. The circuit breaker pattern is commonly associated with the idea of providing fault tolerance and resilience.
+- OpenFeign est un client déclaratif de services web qui simplifie l'intégration de services web REST dans les applications en permettant de définir des services sous forme d'interfaces, les traduisant automatiquement en requêtes HTTP.
+- Le motif du disjoncteur (circuit breaker) est une approche de conception dans les systèmes distribués visant à empêcher qu'une défaillance d'un seul service ne provoque la défaillance de l'ensemble du système. Il gère les erreurs et la latence, assurant une tolérance aux pannes et une résilience dans un environnement distribué.
 ```java
 @FeignClient(name = "RESSOURCE-SERVICE",configuration = OpenFiegnConfiguration.class)
 public interface RessourceOpenFeign {
@@ -217,76 +193,34 @@ public interface RessourceOpenFeign {
     <th>Home</th>
    </tr>
   <tr>
-    <td><img src="screenshots/51.png"/></td>
-    <td><img src="screenshots/24.png"/></td>
+    <td><img src="screens/auth.png"/></td>
+    <td><img src="screens/auth2.png"/></td>
   </tr>
   <tr>
     <th>Ressource Table</th>
-    <th>Search</th>
+    <th>ADD Ressource</th>
   </tr>  
   <tr>
-    <td><img src="screenshots/25.png"/></td>
-    <td><img src="screenshots/26.png"/></td>
+    <td><img src="screens/ressrce.png"/></td>
+    <td><img src="screens/addressource.png"/></td>
   </tr>
   <tr>
-    <th>Add</th>
-    <th>Overview</th>
+    <th>Add RESERVATION</th>
+    <th>RESERVATION</th>
   </tr>
   <tr>
-    <td><img src="screenshots/27.png"/></td>
-    <td><img src="screenshots/28.png"/></td>
+    <td><img src="screens/AddReser.png"/></td>
+    <td><img src="screens/reser.png"/></td>
   </tr>
   <tr>
     <th>Update</th>
     <th>Overview</th>
   </tr>
   <tr>
-    <td><img src="screenshots/29.png"/></td>
-    <td><img src="screenshots/30.png"/></td>
+    <td><img src="screens/editper.png"/></td>
+    <td><img src="screens/editper2.png"/></td>
   </tr>
-  <tr>
-    <th>Ressource Reservation</th>
-    <th>Overview</th>
-  </tr>
-  <tr>
-    <td><img src="screenshots/32.png"/></td>
-    <td><img src="screenshots/33.png"/></td>
-  </tr>
-</table>
-<br><br>
-<table align="center">
-  <tr>
-    <th>Reservation Table</th>
-    <th>Search</th>
-  </tr>  
-  <tr>
-    <td><img src="screenshots/34.png"/></td>
-    <td><img src="screenshots/35.png"/></td>
-  </tr>
-  <tr>
-    <th>Add</th>
-    <th>Overview</th>
-  </tr>
-  <tr>
-    <td><img src="screenshots/36.png"/></td>
-    <td><img src="screenshots/37.png"/></td>
-  </tr>
-  <tr>
-    <th>Update</th>
-    <th>Overview</th>
-  </tr>
-  <tr>
-    <td><img src="screenshots/39.png"/></td>
-    <td><img src="screenshots/40.png"/></td>
-  </tr>
-  <tr>
-    <th>Delete</th>
-    <th>Reservation detail</th>
-  </tr>
-  <tr>
-    <td><img src="screenshots/41.png"/></td>
-    <td><img src="screenshots/38.png"/></td>
-  </tr>
+  
 </table>
 <br><br>
 <table align="center">
@@ -295,137 +229,84 @@ public interface RessourceOpenFeign {
     <th>Search</th>
   </tr>  
   <tr>
-    <td><img src="screenshots/42.png"/></td>
-    <td><img src="screenshots/43.png"/></td>
+    <td><img src="screens/pers.png"/></td>
+    <td><img src="screens/serch.png"/></td>
   </tr>
   <tr>
     <th>Add</th>
     <th>Overview</th>
   </tr>
   <tr>
-    <td><img src="screenshots/44.png"/></td>
-    <td><img src="screenshots/45.png"/></td>
+    <td><img src="screens/addp.png"/></td>
+    <td><img src="screens/addpp.png"/></td>
   </tr>
   <tr>
     <th>Update</th>
     <th>Overview</th>
   </tr>
   <tr>
-    <td><img src="screenshots/46.png"/></td>
-    <td><img src="screenshots/47.png"/></td>
+    <td><img src="screens/u1.png"/></td>
+    <td><img src="screens/u2.png"/></td>
   </tr>
-  <tr>
-    <th>Delete</th>
-    <th>Personne detail</th>
-  </tr>
-  <tr>
-    <td><img src="screenshots/48.png"/></td>
-    <td><img src="screenshots/49.png"/></td>
-  </tr>
+ 
 </table>
 <br>
 
-## Application Security
-To Secure the microservices, we need and an authentication layer and authorisation protocol, Therefore we will use OIDC, OAuth and Keycloak as a provider.
+## Sécurité de l'Application avec OAuth
 
 ### 1. OAuth
-OAuth is an authorization framework that allows a third-party application to obtain limited access to an HTTP service on behalf of a resource owner, such as a user. It is not an authentication protocol, instead, it focuses on delegated access and authorization, and it supports various grant types, such as Authorization Code, Implicit, Resource Owner Password Credentials, and Client Credentials.
-<table align="center">
+OAuth est un cadre d'autorisation qui permet à une application tierce d'obtenir un accès limité à un service HTTP au nom du propriétaire de la ressource, tel qu'un utilisateur. Ce n'est pas un protocole d'authentification, mais il se concentre sur l'accès délégué et l'autorisation, et prend en charge divers types de subventions, tels que le code d'autorisation, implicite, mot de passe du propriétaire de la ressource et client.<table align="center">
   <tr>
-    <th>How It Work</th>
+    <th>Fonctionnement</th>
    </tr>
   <tr>
-    <td><img src="screenshots/54.png"/></td>
+    <td><img src="screens/1.jpg"/></td>
   </tr>
 </table>
 <br>
 
-### 2. OIDC
-OpenID Connect is an identity layer on top of OAuth. It adds an authentication layer to OAuth, allowing clients to verify the identity of the end-user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the user. OIDC Components:
-- ID Token: A JWT (JSON Web Token) that contains information about the authenticated user.
-- UserInfo Endpoint: An endpoint where additional user information can be retrieved.
-- Discovery: A mechanism for dynamically discovering OIDC endpoints and configuration.
-<table align="center">
-  <tr>
-    <th>How It Work</th>
-   </tr>
-  <tr>
-    <td><img src="screenshots/55.png"/></td>
-  </tr>
-</table>
-<br>
+
 
 ### 3. Keycloak
-Keycloak is an open-source Identity and Access Management solution. It provides functionalities for user authentication, authorization, and management, and it supports various standards, including OAuth and OIDC. Keycloak can be configured as an OAuth Authorization Server and an OIDC Provider. Clients in Keycloak are registered with the necessary settings and can use OAuth or OIDC flows for authentication and authorization. Keycloak's Role:
-- Authentication: Keycloak handles the authentication process, including supporting various identity providers.
-- Authorization: Keycloak serves as an authorization server, managing access tokens and enforcing authorization policies.
-- User Management: Keycloak allows administrators to manage users, roles, and permissions.
-- Single Sign-On (SSO): Keycloak supports SSO, allowing users to log in once and access multiple applications without re-authenticating.
+Keycloak est une solution open source de gestion de l'identité et de l'accès. Il offre des fonctionnalités d'authentification, d'autorisation et de gestion des utilisateurs, et prend en charge diverses normes, dont OAuth et OIDC. Keycloak peut être configuré en tant que serveur d'autorisation OAuth et fournisseur OIDC. Les clients dans Keycloak sont enregistrés avec les paramètres nécessaires et peuvent utiliser les flux OAuth ou OIDC pour l'authentification et l'autorisation. Rôle de Keycloak :
+Authentification : Keycloak gère le processus d'authentification, y compris le support de divers fournisseurs d'identité.
+Autorisation : Keycloak sert de serveur d'autorisation, gérant les jetons d'accès et appliquant les politiques d'autorisation.
+Gestion des utilisateurs : Keycloak permet aux administrateurs de gérer les utilisateurs, les rôles et les autorisations.
+Single Sign-On (SSO) : Keycloak prend en charge le SSO, permettant aux utilisateurs de se connecter une fois et d'accéder à plusieurs applications sans se réauthentifier.
 <table align="center">
   <tr>
-    <th>How It Work</th>
+    <th>Fonctionnement</th>
    </tr>
   <tr>
-    <td><img src="screenshots/53.png"/></td>
+    <td><img src="screens/222.png"/></td>
   </tr>
 </table>
 <br>
 
 ### 4. Steps
-<table align="center">
-  <tr>
-    <th>Run Keycloak</th>
-    <th>Authentication</th>
-   </tr>
-  <tr>
-    <td><img src="screenshots/2.png"/></td>
-    <td><img src="screenshots/3.png"/></td>
-  </tr>
-  <tr>
-    <th>Create Realm</th>
-    <th>Create Client</th>
-   </tr>
-  <tr>
-    <td><img src="screenshots/4.png"/></td>
-    <td><img src="screenshots/21.png"/></td>
-  </tr>
-  <tr>
-    <th>Create Users</th>
-    <th>Create Roles</th>
-   </tr>
-  <tr>
-    <td><img src="screenshots/22.png"/></td>
-    <td><img src="screenshots/23.png"/></td>
-  </tr>
-</table>
 
-- Implementing Authentication: When a user attempts to log in to your application, they are redirected to Keycloak. Here, they authenticate using their credentials. Upon successful authentication, Keycloak issues an ID token (for OIDC) and an access token (JWT). The ID token contains information about the user's identity, while the access token includes user roles and permissions.</br>
-Maven dependency
-```java
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-</dependency>
-```
-Application.properties
-```java
-spring.security.oauth2.resourceserver.jwt.issuer-uri=${JWT_ISSUER_URI:http://localhost:8080/realms/sdia-realm}
-spring.security.oauth2.resourceserver.jwt.jwk-set-uri=${JWT_JWK_SET_URI:http://localhost:8080/realms/sdia-realm/protocol/openid-connect/certs}
-```
-- Securing the Backend (APIs): The backend services validate the JWT on each request. This can be done using Keycloak's adapters or libraries that can validate JWTs. Implement access control checks based on the roles and permissions contained in the JWT. You can use annotations like @PreAuthorize in your controllers for role-based access control.
-```java
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-  return http
-    .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
-    .oauth2ResourceServer(o2->o2.jwt(jwt->jwt.jwtAuthenticationConverter(jwtAuthConverter)))
-    .headers(h->h.frameOptions(fo->fo.disable()))
-    .csrf(csrf->csrf.ignoringRequestMatchers("/h2-console/**"))
-    .build();
-}
-```
-- Securing the Frontend Application: Store the tokens securely in the client application . Include the JWT in the Authorization header when making requests to protected resources.
-- Config OpenFeign Rest Interface, so it will be able to access to the Ressource service
+<h3>Authentication</h3>
+ 
+<img src="screens/auth.png"/>
+ 
+  
+<h3>Create Client</h3>
+  
+  
+<img src="screens/k1.png"/>
+  
+  
+<h3>Create Users</h3>
+ 
+  
+<img src="screens/k2.png"/>
+<h3>Create Roles</h3>
+
+<img src="screens/k3.png"/>
+
+
+- Sécurisation de l'application frontend : Stockez de manière sécurisée les jetons dans l'application cliente. Incluez le JWT dans l'en-tête Authorization lors de l'envoi de requêtes vers des ressources protégées.
+- Configuration de l'interface Rest OpenFeign afin qu'elle puisse accéder au service de ressources.
 ```java
 @Component
 public class OpenFiegnConfiguration implements RequestInterceptor {
@@ -465,7 +346,7 @@ services:
     ports:
       - "8083:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: med@gmail.com
+      PGADMIN_DEFAULT_EMAIL: alaa@gmail.com
       PGADMIN_DEFAULT_PASSWORD: ****
     volumes:
       - pgadmin_data:/var/lib/pgadmin
@@ -580,6 +461,5 @@ volumes:
   pgadmin_data:
 ```
 
-## License
-[MIT LICENSE](LICENSE)
+
 

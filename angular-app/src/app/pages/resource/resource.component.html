@@ -3,14 +3,14 @@
     <div class="text-danger">{{ errorMessage }}</div>
   </ng-template>
 
-  <div class="card mt-3" *ngIf="resources; else errorTemplate">
-    <div class="card-header">Resource List</div>
+  <div class="card mt-3 bg-secondary text-dark"> <!-- Set background color to gray -->
+    <div class="card-header bg-primary">Resource List</div>
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
           <form [formGroup]="searchResourceFormGroup" (ngSubmit)="searchResource()">
             <div class="input-group">
-              <label class="input-group-text bg-white">Resource Name</label>
+              <label class="input-group-text bg-light border-0" style="color: #495057;">Resource Name</label>
               <input type="text" class="form-control" formControlName="keyword">
               <button class="btn btn-info">
                 <i class="bi bi-search"></i>
@@ -27,12 +27,12 @@
       <div class="row mt-2">
         <div class="card">
           <div class="card-body">
-            <table class="table">
-              <thead>
+            <table class="table table-striped table-bordered">
+              <thead class="table-primary">
               <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Type</th>
+                <th class="text-dark">Name</th>
+                <th class="text-dark">Type</th>
                 <!--<th *ngIf="authService.hasRole('ADMIN')"></th>
                 <th *ngIf="authService.hasRole('ADMIN')"></th>-->
               </tr>
@@ -42,12 +42,12 @@
                 <td>{{ resource.id }}</td>
                 <td>{{ resource.nom }}</td>
                 <td>{{ resource.type }}</td>
-                <td >
+                <td>
                   <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#updateResourceModal" (click)="selectResource(resource)">
                     <i class="bi bi-pen"></i>
                   </button>
                 </td>
-                <td >
+                <td>
                   <button class="btn btn-danger" (click)="deleteResource(resource.id)">
                     <i class="bi bi-trash"></i>
                   </button>
@@ -64,6 +64,7 @@
     </div>
   </div>
 </div>
+
 
 <div class="modal fade" id="updateResourceModal" tabindex="-1" aria-labelledby="updateResourceModalLabel" aria-hidden="true">
   <div class="modal-dialog">

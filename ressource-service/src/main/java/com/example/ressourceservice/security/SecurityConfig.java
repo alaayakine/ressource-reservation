@@ -28,6 +28,8 @@ public class SecurityConfig {
         return http
                 //.cors(Customizer.withDefaults())
                 //.authorizeHttpRequests(ar->ar.requestMatchers("/ressources/**","/**").permitAll())
+                .authorizeHttpRequests(ar->ar.requestMatchers("/ressources/**","/h2-console/**","/api-docs/**","/swagger-ui/**","/v3/**","/h2-console/**","/public/**","/actuator/**").permitAll())
+
                 .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
                 .oauth2ResourceServer(o2->o2.jwt(jwt->jwt.jwtAuthenticationConverter(jwtAuthConverter)))
                 .headers(h->h.frameOptions(fo->fo.disable()))

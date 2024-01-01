@@ -12,10 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @SpringBootApplication
 @EnableFeignClients
@@ -29,15 +26,16 @@ public class ReservationServiceApplication {
 	CommandLineRunner commandLineRunner (ReservationRepository reservationRepository,
 										 PersonneRepository personneRepository, RessourceOpenFeign ressourceOpenFeign){
 		return args -> {
+			List<String> names=new ArrayList<>(Arrays.asList("alaa","sabile","salah","ayoub","mohammed"));
 
 			int k=1;
 
 			for (int i = 1; i <= 10; i++) {
-
+				String s = names.get(new Random().nextInt(4));
 				Personne personne=new Personne();
-				personne.setNom("Personne "+i);
-				personne.setEmail("personne" + i + "@gmail.com");
-				personne.setFonction("Function "+i);
+				personne.setNom(s);
+				personne.setEmail(s + i + "@gmail.com");
+				personne.setFonction(UUID.randomUUID().toString().substring(0,6));
 
 				personne=personneRepository.save(personne);
 
@@ -51,7 +49,7 @@ public class ReservationServiceApplication {
 
 					Reservation reservation=new Reservation();
 					reservation.setNom("Reservation "+k);
-					reservation.setContexte("context "+k);
+					reservation.setContexte("cxt "+k);
 					reservation.setDate(new Date());
 					reservation.setDuree(random.nextInt(1,4));
 					reservation.setPersonne(personne);
